@@ -12,6 +12,16 @@ export class AppService {
     });
   }
 
+  public async constructEventFromPayload(signature: string, payload: Buffer) {
+    const webhookSecret = this.configService.get('STRIPE_WEBHOOK_SECRET');
+
+    return this.stripe.webhooks.constructEvent(
+      payload,
+      signature,
+      webhookSecret,
+    );
+  }
+
   async payment(): Promise<any> {
     console.log('secret', this.configService.get('STRIPE_SECRET_KEY'));
     const session = await this.stripe.checkout.sessions.create({

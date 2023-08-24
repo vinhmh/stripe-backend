@@ -11,6 +11,7 @@ import * as Joi from '@hapi/joi';
         STRIPE_SECRET_KEY: Joi.string(),
         STRIPE_CURRENCY: Joi.string(),
         FRONTEND_URL: Joi.string(),
+        STRIPE_WEBHOOK_SECRET: Joi.string(),
         // ...
       }),
     }),
