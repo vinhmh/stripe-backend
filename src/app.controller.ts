@@ -31,14 +31,17 @@ export class AppController {
     @Headers('stripe-signature') signature: string,
     @Req() request: RequestWithRawBody,
   ) {
+    console.log('call webhook', request.body);
     if (!signature) {
       throw new BadRequestException('Missing stripe-signature header');
     }
 
+    console.log(1);
     const event = await this.appService.constructEventFromPayload(
       signature,
       request.rawBody,
     );
+    console.log('event', event);
     if (
       event.type === 'customer.subscription.updated' ||
       event.type === 'customer.subscription.created'
